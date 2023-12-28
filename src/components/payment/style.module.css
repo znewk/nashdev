@@ -1,0 +1,134 @@
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;;
+}
+.form{
+    background-color: white;
+    width: 50%;
+    padding: 50px;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+.formTitle{
+    margin-top: 0;
+}
+
+.line{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.lineTitle{
+    font-family: "Raleway Bold";
+}
+.formSubtitle{
+    margin: 0 0 30px 0;
+}
+
+.lineResult{
+    margin: 30px 0 30px 0;
+    font-size: 20px;
+}
+
+.footer{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.close{
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-family: "Raleway Regular";
+    font-size: 16px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.btn{
+    background: #36FFB9;
+    border: 1px solid #36FFB9;
+    padding: 10px 16px;
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    font-family: "Raleway Regular";
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.formHeader{
+    margin-bottom: 15px;
+}
+
+.goBackStep{
+    color: #00000073;
+    cursor: pointer;
+}
+
+.paymentVariants{
+    display: flex;
+
+}
+.paymentVariant{
+    padding: 15px;
+    width: 40%;
+    border: 1px solid #00000026;
+    border-radius: 16px;
+    height: 175px;
+    margin-right: 20px;
+    cursor: pointer;
+    font-family: 'Raleway Bold';
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    transition: 0.3s;
+}
+
+.choosed{
+    border: 1px solid black;
+}
+
+.kaspiQr{
+    height: 100%;
+}
+
+.paymentBtn{
+    width: 100%;
+    padding: 16px;
+    margin-top: 30px;
+}
+
+.kaspi{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.kaspiSteps{
+
+}
+
+.kaspiStep{
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.kaspiStepValue{
+    margin-right: 10px;
+}
+.kaspiStepValue{
+    height: 48px;
+    width: 48px;
+    font-size: 18px;
+    color: #00000073;
+    border-radius: 50%;
+    background: #0000000F;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

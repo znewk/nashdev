@@ -1,0 +1,50 @@
+@font-face {
+    font-family: "Raleway Regular";
+    src: url("/fonts/Raleway/Raleway-Regular.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Raleway Medium";
+    src: url('/fonts/Raleway/Raleway-Medium.ttf') format("truetype");
+}
+@font-face {
+    font-family: "Raleway Bold";
+    src: url("/fonts/Raleway/Raleway-Bold.ttf") format("truetype");
+}
+button:active{
+    outline: none;
+}
+button:focus, input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+body {
+    margin: 0;
+    font-family: "Raleway Regular";
+    color: #23262F;
+}
+
+.p-tabview-title, .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    color: black;
+}
+
+.p-tabview .p-tabview-nav .p-tabview-ink-bar {
+    border-radius: 5px;
+    width:10px;
+    background: linear-gradient(270deg, #58C3FF 25%, #57FEE0 93.18%);
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+    background: #ffffff;
+    border-color: #57FEE0;
+    /*height: 5px;*/
+    color: #57FEE0;
+}
+
+.p-inputtext{
+    border: none;
+    background: rgba(242, 242, 242, 0.40);
+    width: 100%
+}
+
+.p-inputtext:focus{
+    box-shadow: none;
+}

@@ -1,0 +1,17 @@
+.tagCustom {
+  padding: 8px; /* Увеличение отступов */
+  font-size: 18px; /* Увеличение размера текста */
+  border-radius: 15px; /* Увеличение скругления углов */
+  border: none; /* Удаление границы */
+  transition: all 0.3s; /* Плавный переход цветов */
+}
+
+.tagChecked {
+  background-color: rgba(30, 29, 29, 0.875) !important; /* Черный фон для выбранного тега */
+  color: white !important; /* Белый цвет текста для выбранного тега */
+}
+
+
+.text{ 
+  padding-bottom: 100px;
+}
