@@ -122,29 +122,34 @@ const CreateOrderForm = ({ changeModalShowState }) => {
     };
 
     const handleSubmit = async () => {
-        // Собираем данные формы
-        const formData = {
-            phone,
-            description,
-            categoryIds
-        };
-
-        // Отправляем запрос на сервер
-        // Замените URL на ваш эндпоинт
-        const response = await fetch(`${API_BASE_URL}/createRequest`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` 
-            },
-            body: JSON.stringify(formData)
-        });
-
-        if (response.ok) {
-            console.log("Заказ успешно создан");
-            changeModalShowState(false);
-        } else {
-            console.error('Ошибка при создании заказа. Статус:', response.status);
+        const formData = new FormData();
+    
+        formData.append('phone', phone);
+        formData.append('description', description);
+        formData.append('categoryIds', JSON.stringify(categoryIds));
+    
+        // Добавляем файлы
+        // Предположим, что у вас есть состояние fileList для хранения файлов от Upload компонента
+        // fileList.forEach(file => formData.append('files', file.originFileObj));
+    
+        try {
+            const response = await fetch(`${API_BASE_URL}/createRequest`, {
+                method: 'POST',
+                headers: {
+                    // Content-Type не устанавливается, так как браузер автоматически установит правильный тип для FormData
+                    'Authorization': `Bearer ${token}` 
+                },
+                body: formData
+            });
+    
+            if (response.ok) {
+                console.log("Заказ успешно создан");
+                changeModalShowState(false);
+            } else {
+                console.error('Ошибка при создании заказа. Статус:', response.status);
+            }
+        } catch (error) {
+            console.error('Ошибка при отправке формы:', error);
         }
     };
 

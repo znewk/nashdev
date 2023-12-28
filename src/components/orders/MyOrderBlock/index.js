@@ -13,12 +13,15 @@ const MyOrderBlock = ({id, ...props}) => {
     const [order, setOrder] = useState([])
     const [loadingOrder, setLoadingOrder] = useState(true)
 
-    useEffect(async () => {
-        setOrder(await API.getOrderById())
-
-        setLoadingOrder(false)
+    useEffect(() => {
+        const fetchOrder = async () => {
+            const order = await API.getOrderById();
+            setOrder(order);
+            setLoadingOrder(false);
+        };
+    
+        fetchOrder();
     }, []);
-
     return (
         <div className={styles.container}>
             <div className={styles.info}>

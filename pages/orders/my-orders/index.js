@@ -16,10 +16,14 @@ const myOrders = () => {
     const [createOrderShow, setCreateOrderShow] = useState(false)
     const [loadingOrders, setLoadingOrders] = useState(true)
 
-    useEffect(async () => {
-        setOrders(await API.getAllOrders())
-
-        setLoadingOrders(false)
+    useEffect(() => {
+        const fetchOrders = async () => {
+            const allOrders = await API.getAllOrders();
+            setOrders(allOrders);
+            setLoadingOrders(false);
+        };
+    
+        fetchOrders();
     }, []);
 
     const changeModalShowState = (state) => {

@@ -35,7 +35,7 @@ const MyOrdersList = ({changeModalShowState, orders, loadingOrders, ...props}) =
 
     // useEffect(async () => {
     //     setOrders(await API.getAllOrders())
-    //
+    
     //     setLoadingOrders(false)
     // }, []);
 
