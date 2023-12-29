@@ -1,8 +1,38 @@
 import axios from "axios";
 
-const serverDomain = 'https://backend.kz'
+const serverDomain = 'https://0e71-147-30-76-116.ngrok-free.app'
 
 class API {
+
+    getRequestsByCreator = async () => {
+        try {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                console.error('Отсутствует токен авторизации');
+                return;
+            }
+
+            const headers = new Headers({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            });
+
+            const response = await fetch(`${serverDomain}/getRequestsByCreator`, {
+                method: 'GET',
+                headers: headers,
+            });
+
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP: ${response.status}`);
+            }
+
+            const responseData = await response.json();
+            console.log(responseData);
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса', error);
+        }
+    };
 
     getOrderById = async () => {
         return {

@@ -8,6 +8,7 @@ import {Dialog} from "primereact/dialog";
 import {useEffect, useState} from "react";
 import CreateOrderForm from "../../../src/components/Modals/CreateOrderForm";
 import MyOrdersList from "../../../src/components/orders/MyOrdersList";
+import ScrollToTop from "../../../src/components/ScrollToTop";
 
 const myOrders = () => {
     const API = new api()
@@ -18,6 +19,7 @@ const myOrders = () => {
 
     useEffect(() => {
         const fetchOrders = async () => {
+            API.getRequestsByCreator()
             const allOrders = await API.getAllOrders();
             setOrders(allOrders);
             setLoadingOrders(false);
@@ -36,6 +38,7 @@ const myOrders = () => {
             </Head>
 
             <Header changeModalShowState={changeModalShowState}/>
+            <ScrollToTop/>
 
             <div className={styles.content}>
                 <SideBar changeModalShowState={changeModalShowState}/>
