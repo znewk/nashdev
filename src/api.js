@@ -32,7 +32,7 @@ class API {
             }
     
             const responseData = await response.json();
-            console.log(responseData);
+            return responseData.requests
         } catch (error) {
             console.error('Ошибка при выполнении запроса', error);
         }

@@ -16,7 +16,7 @@ const MyOrderCard = ({order, ...props}) => {
                     <div>
                         <div className={styles.headerItems}>
                             <span className={styles.headerItem}>№{order.id}</span>
-                            <span className={styles.headerItem}>Дата создания: {order.date}</span>
+                            <span className={styles.headerItem}>Дата создания: {order.start_date}</span>
                         </div>
 
                         <h2 className={styles.infoTitle}>{order.title}</h2>
@@ -25,14 +25,14 @@ const MyOrderCard = ({order, ...props}) => {
 
 
                     <div className={styles.orderStatus}>
-                        {order.currentStatus.title}
+                        {order.statusId}
                     </div>
                 </div>
 
                 <div className={styles.infoFooter}>
                     <div className={styles.infoText}>
                         <p className={styles.infoDesc}>
-                            Существуют две основные трактовки понятия «текст»: имманентная (расширенная, философски нагруженная) и репрезентативная (более частная). Имманентный подход подразумевает отношение к тексту как к автономной реальности, нацеленность на выявление его внутренней структуры. Репрезентативный — рассмотрение текста как особой формы представления информации о внешней тексту действительности.
+                            {order.descriptin}
                         </p>
                     </div>
 

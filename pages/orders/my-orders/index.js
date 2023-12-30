@@ -14,15 +14,23 @@ const myOrders = () => {
     const API = new api()
 
     const [orders, setOrders] = useState([])
+    const [requests, setRequests] = useState([])
     const [createOrderShow, setCreateOrderShow] = useState(false)
     const [loadingOrders, setLoadingOrders] = useState(true)
 
     useEffect(() => {
         const fetchOrders = async () => {
-            API.getRequestsByCreator()
+            // API.getRequestsByCreator()
+
+            const allRequests = await API.getRequestsByCreator();
             const allOrders = await API.getAllOrders();
+            
             setOrders(allOrders);
+            setRequests(allRequests);
             setLoadingOrders(false);
+
+
+            console.log(requests)
         };
     
         fetchOrders();
@@ -45,7 +53,7 @@ const myOrders = () => {
 
                 <div className={styles.orders}>
                     <h1>Мои заказы</h1>
-                    <MyOrdersList orders={orders} loadingOrders={loadingOrders} changeModalShowState={changeModalShowState}/>
+                    <MyOrdersList orders={requests} loadingOrders={loadingOrders} changeModalShowState={changeModalShowState}/>
                 </div>
             </div>
 
