@@ -9,7 +9,7 @@ const Auth = () => {
                 <title>NASHDEV - Вход</title>
             </Head>
 
-            <InfoBlock/>
+            {/* <InfoBlock/> */}
             <LoginForm/>
         </div>
     )
