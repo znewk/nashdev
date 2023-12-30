@@ -26,7 +26,7 @@ const MyOrdersList = ({changeModalShowState, orders, loadingOrders, ...props}) =
             case 2:
             case 3:
             case 4:
-                setOrders(await API.getAllOrders())
+                setOrders(await API.getRequestsByCreator())
         }
 
         setCurrentPage(idx)

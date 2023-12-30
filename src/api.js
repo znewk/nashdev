@@ -1,4 +1,5 @@
 import axios from "axios";
+import API_BASE_URL from '../config.js'
 
 const serverDomain = 'https://0e71-147-30-76-116.ngrok-free.app'
 
@@ -7,32 +8,36 @@ class API {
     getRequestsByCreator = async () => {
         try {
             const token = localStorage.getItem('token');
-
+    
             if (!token) {
                 console.error('Отсутствует токен авторизации');
                 return;
             }
-
+    
             const headers = new Headers({
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             });
-
-            const response = await fetch(`${serverDomain}/getRequestsByCreator`, {
-                method: 'GET',
+    
+            // const statusId =  1;
+    
+            const response = await fetch(`${API_BASE_URL}/getRequestsByCreator`, {
+                method: 'POST', 
                 headers: headers,
+                // body: JSON.stringify({ statusId: statusId }), 
             });
-
+    
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
             }
-
+    
             const responseData = await response.json();
             console.log(responseData);
         } catch (error) {
             console.error('Ошибка при выполнении запроса', error);
         }
     };
+
 
     getOrderById = async () => {
         return {

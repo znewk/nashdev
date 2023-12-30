@@ -26,7 +26,7 @@ const OrdersList = ({changeModalShowState, ...props}) => {
             case 2:
             case 3:
             case 4:
-                setOrders(await API.getAllOrders())
+                setOrders(await API.getRequestsByCreator())
         }
 
         setCurrentPage(idx)
@@ -34,7 +34,7 @@ const OrdersList = ({changeModalShowState, ...props}) => {
     }
 
     useEffect(async () => {
-        setOrders(await API.getAllOrders())
+        setOrders(await API.getRequestsByCreator())
 
         setLoadingOrders(false)
     }, []);
