@@ -32,7 +32,7 @@ const MyOrderCard = ({order, ...props}) => {
                 <div className={styles.infoFooter}>
                     <div className={styles.infoText}>
                         <p className={styles.infoDesc}>
-                            {order.descriptin}
+                            {order.description}
                         </p>
                     </div>
 
