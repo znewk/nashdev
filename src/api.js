@@ -1,7 +1,7 @@
 import axios from "axios";
 import API_BASE_URL from '../config.js'
 
-const serverDomain = 'https://0e71-147-30-76-116.ngrok-free.app'
+const serverDomain = 'https://0e5e-147-30-76-116.ngrok-free.app'
 
 class API {
 
