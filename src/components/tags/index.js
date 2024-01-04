@@ -1,51 +1,6 @@
-// import styles from "./style.module.css";
-// import { Space, Tag } from "antd";
-// import { useState } from "react";
-// const { CheckableTag } = Tag;
-
-// const tagsData = [
-//   "Android",
-//   "Мобильное Приложение",
-//   "Web",
-//   "Frontend",
-//   "Серверное ПО",
-//   "Data Analitycs"
-// ];
-
-// const Tags  = () => {
-//   const [selectedTags, setSelectedTags] = useState(["Books"]);
-
-//   const handleChange = (tag, checked) => {
-//     const nextSelectedTags = checked
-//       ? [...selectedTags, tag]
-//       : selectedTags.filter((t) => t !== tag);
-//     console.log("You are interested in: ", nextSelectedTags);
-//     setSelectedTags(nextSelectedTags);
-//   };
-
-//   return (
-//     <>
-//       <span style={{ display: 'inline-block', paddingBottom: '15px' }}>Выберите Категорию:</span>
-//       <Space size={[12, 6]} wrap>
-//         {tagsData.map((tag) => (
-//           <CheckableTag
-//             key={tag}
-//             checked={selectedTags.includes(tag)}
-//             onChange={(checked) => handleChange(tag, checked)}
-//             className={`${selectedTags.includes(tag) ? styles.tagChecked : ''} ${styles.tagCustom}`}
-
-//           >
-//             {tag}
-//           </CheckableTag>
-//         ))}
-//       </Space>
-//     </>
-//   );
-// };
-
-// export default Tags;
-
 import React, { useState } from 'react';
+import styles from './style.module.css'
+import classnames from 'classnames'
 import { Tag } from "antd";
 const { CheckableTag } = Tag;
 
@@ -70,15 +25,15 @@ const Tags = ({ onChange }) => {
     };
 
     return (
-        <div>
+        <div className={styles.tagsWrapper}>
             {categories.map(tag => (
-                <CheckableTag
+                <div
+                    className={classnames(styles.tag, selectedCategoryIds.includes(tag.id) && styles.tagChecked)}
                     key={tag.id}
-                    checked={selectedCategoryIds.includes(tag.id)}
-                    onChange={checked => handleChange(tag, checked)}
-                >
+                    onClick={checked => handleChange(tag, checked)}
+                    >
                     {tag.title}
-                </CheckableTag>
+                </div>
             ))}
         </div>
     );

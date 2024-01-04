@@ -6,12 +6,15 @@ import {notification} from "antd";
 import {Image} from "react-bootstrap";
 import { Rate } from 'antd';
 import classnames from "classnames";
+import { Dialog } from 'primereact/dialog';
+import OrderResponseCard from '../OrderResponseCard';
 
 const MyOrderBlock = ({id, ...props}) => {
     const API = new api()
 
     const [order, setOrder] = useState([])
     const [loadingOrder, setLoadingOrder] = useState(true)
+
 
     useEffect(() => {
         const fetchOrder = async () => {
@@ -104,26 +107,7 @@ const MyOrderBlock = ({id, ...props}) => {
                         order.responses && (
                             <div className={styles.responsesWrapper}>
                                 {order.responses.map(response => (
-                                    <div className={styles.responseCard}>
-                                        <div className={styles.responseCardTop}>
-                                            <Image src={'/avatar.png'} className={styles.responseCardAvatar}/>
-                                            <div className={styles.responseCardTopInfo}>
-                                                <h2 style={{margin: '0 0 10px 0'}}>{response.name}</h2>
-                                                <div className={styles.responseCardTopInfoRating}>
-                                                    <Rate disabled  defaultValue={response.rating} />
-                                                    <span>{response.feedbacks}</span>
-                                                </div>
-                                                <div>
-                                                    <span className={styles.responseCardTopInfoSubtitle}>Срок: {response.deadline}</span> <br/>
-                                                    <span className={styles.responseCardTopInfoSubtitle}>Цена: {response.price}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className={styles.responseCardBottom}>
-                                            <button className={styles.responseCardBottomButton}>Портфолио</button>
-                                            <button className={classnames(styles.responseCardBottomButton, styles.responseCardBottomButtonGreen)}>Нанять</button>
-                                        </div>
-                                    </div>
+                                    <OrderResponseCard order={order} response={response}/>
                                 ))}
                             </div>
                         )

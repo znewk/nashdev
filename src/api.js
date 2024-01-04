@@ -86,21 +86,21 @@ class API {
                     rating: 5,
                     feedbacks: 384,
                     deadline: '2 недели',
-                    price: 30000
+                    price: '30 000 тг'
                 },
                 {
                     name: 'Айдарбек',
                     rating: 5,
                     feedbacks: 384,
                     deadline: '2 недели',
-                    price: 30000
+                    price: '30 000 тг'
                 },
                 {
                     name: 'Айдарбек',
                     rating: 5,
                     feedbacks: 384,
                     deadline: '2 недели',
-                    price: 30000
+                    price: '30 000 тг'
                 }
             ],
             isNeedPayment: true

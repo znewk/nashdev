@@ -32,8 +32,12 @@ const CreateOrderFormNoReg = ({ isVissible, changeModalShowState, ...props }) =>
                 <h1 className={styles.formTitle}>Создание заказ</h1>
 
                 <div className={styles.infoTitleBlock}>
-
-                <span className={styles.infoTitle}><Tags></Tags></span>
+                        <span className={styles.infoTitle}>Выберите категорию</span>
+                </div>
+                <div className={styles.infoTitleBlock}>
+                    <span className={styles.infoTitle}>
+                        <Tags/>
+                    </span>
                 </div>
 
 

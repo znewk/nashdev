@@ -53,7 +53,7 @@ const Orders = () => {
                             <input type="email" placeholder={'Поиск заказов'} className={styles.input} value={searchInput} onChange={(e) => {setSearchInput(e.target.value);}}/>
                         </div>
                     </div>
-                    <OrdersList changeModalShowState={changeModalShowState}/>
+                    {/* <OrdersList changeModalShowState={changeModalShowState}/> */}
                 </div>
             </div>
 

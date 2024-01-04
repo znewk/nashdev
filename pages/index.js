@@ -31,7 +31,7 @@ const Index = () => {
             <div>
                 <HeaderMain changeModalShowState={changeModalShowState} />
                 <Auth isVisible={isModalVisible} onHide={() => changeModalShowState(false, false, false)} onForgotPassword={() => changeModalShowState(false, false, true)} />            <ResetPasswordDialog isResetVisible={isResetPasswordVisible} onHideReset={() => setIsResetPasswordVisible(false)} />
-                <Dialog visible={createOrderShow} onHide={() => setCreateOrderShow(false)}>
+                <Dialog visible={createOrderShow} onHide={() => setCreateOrderShow(false)} draggable={false}>
                     <CreateOrderFormNoReg onHide={() => setCreateOrderShow(false)} />
                 </Dialog>
             </div>

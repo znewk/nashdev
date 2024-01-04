@@ -3,6 +3,7 @@
 .header{
     padding: 50px 20px;
     box-sizing: border-box;
+    margin-top: 64px;
 }
 .avatar{
     height: 200px;
