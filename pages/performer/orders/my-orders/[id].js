@@ -1,8 +1,8 @@
 import styles from './id.module.css'
 import Head from "next/head";
-import Header from "../../../src/components/Header";
-import SideBar from "../../../src/components/orders/SideBar";
-import OrdersList from "../../../src/components/orders/OrdersList";
+import Header from "../../../../src/components/performer/Header";
+import SideBar from "../../../../src/components/performer/orders/SideBar";
+import OrdersList from "../../../../src/components/performer/orders/OrdersList";
 import api from "../../../src/api";
 import {Dialog} from "primereact/dialog";
 import {useEffect, useState} from "react";
