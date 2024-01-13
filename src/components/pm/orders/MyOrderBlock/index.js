@@ -8,26 +8,36 @@ import { Rate } from 'antd';
 import classnames from "classnames";
 import { Dialog } from 'primereact/dialog';
 import OrderResponseCard from '../OrderResponseCard';
+import PmAPI from '../../../../api/pm';
+import OrderTasks from '../OrderTasks';
 
 const MyOrderBlock = ({id, ...props}) => {
-    const API = new api()
+    const API = new PmAPI()
 
     const [order, setOrder] = useState([])
+    const [tasks, setTasks] = useState([])
     const [loadingOrder, setLoadingOrder] = useState(true)
 
 
-    useEffect(() => {
+    useEffect(async () => {
         if (!id) {
             setLoadingOrder(true);
             return; // Выход, если ID еще не установлен
         }
 
         const fetchOrder = async () => {
-            const orders = await API.getOrderById();
+            const orders = await API.getAllRequests();
             const foundOrder = orders.find(order => order.id === parseInt(id));
             setOrder(foundOrder || null);
+
+            const tasks = await API.getManagerTasksByRequest(foundOrder.id)
+            console.log(tasks)
+
+            console.log(foundOrder)
             setLoadingOrder(false);
         };
+
+        
 
         fetchOrder();
     }, [id]);
@@ -119,6 +129,8 @@ const MyOrderBlock = ({id, ...props}) => {
                         )
                     }
 
+
+                    <OrderTasks tasks={tasks} order={order}/>
                 </div>
             </div>
 

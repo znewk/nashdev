@@ -11,9 +11,10 @@ import MyOrdersList from "../../../../src/components/pm/orders/MyOrdersList";
 import ScrollToTop from "../../../../src/components/ScrollToTop";
 import { SearchOutlined } from '@ant-design/icons';
 import { Flex, Input, Space, Button  } from 'antd';
+import PmAPI from '../../../../src/api/pm';
 
 const myOrders = () => {
-    const API = new api()
+    const API = new PmAPI()
     const { Search } = Input;
 
     const [orders, setOrders] = useState([])
@@ -21,20 +22,21 @@ const myOrders = () => {
     const [createOrderShow, setCreateOrderShow] = useState(false)
     const [loadingOrders, setLoadingOrders] = useState(true)
 
+    const [user, setUser] = useState('')
+
     useEffect(() => {
         const fetchOrders = async () => {
 
-            const allRequests = await API.getRequestsByCreator();
-            const allOrders = await API.getAllOrders();
+            const allOrders = await API.getAllRequests();
             
             setOrders(allOrders);
-            setRequests(allRequests);
+            setRequests(allOrders);
             setLoadingOrders(false);
 
 
             console.log(requests)
         };
-    
+        setUser(JSON.parse(localStorage.getItem('user')))
         fetchOrders();
     }, []);
 
@@ -44,7 +46,7 @@ const myOrders = () => {
     return (
         <div className={styles.container}>
             <Head>
-                <title>NASHDEV - Заказы</title>
+                <title>NASHDEV - Проекты</title>
             </Head>
 
             <Header changeModalShowState={changeModalShowState}/>
@@ -54,31 +56,24 @@ const myOrders = () => {
                 <SideBar changeModalShowState={changeModalShowState}/>
 
                 <div className={styles.orders}>
-                    <h1 className='font-bold text-3xl' style={{marginTop: '20px'}}>Мои заказы</h1>
-                    <div                         style={{ marginTop: '20px', marginBottom: '20px' }} // Добавление отступа справа
->
-
-                            <Button
-                        onClick={() => {
-                        }}
-                        style={{ marginRight: '10px' }} // Добавление отступа справа
-
-                        >
-                        Мои Заказы
-                        </Button>
+                    <h1 className='font-bold text-3xl' style={{marginTop: '20px'}}>Мои проекты</h1>
+                    <div style={{ marginTop: '20px', marginBottom: '20px' }}>
                         <Button
-                        onClick={() => {
-                        }}
-                        style={{ marginRight: '10px' }} // Добавление отступа справа
+                            onClick={() => {
+                            }}
+                            style={{ marginRight: '10px' }} // Добавление отступа справа
+                        >Мои Заказы</Button>
 
-                        >
-                        Откликнулся
-                        </Button>
+                        <Button
+                            onClick={() => {
+                            }}
+                            style={{ marginRight: '10px' }} // Добавление отступа справа
+                        >Откликнулся</Button>
 
                     </div>
 
 
-                  <MyOrdersList orders={requests} loadingOrders={loadingOrders} changeModalShowState={changeModalShowState}/>
+                  <MyOrdersList user={user} orders={requests} loadingOrders={loadingOrders} changeModalShowState={changeModalShowState}/>
                 </div>
             </div>
 

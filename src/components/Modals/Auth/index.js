@@ -31,6 +31,7 @@ const Auth = ({ isVisible, onHide, ...props }) => {
                 const data = await response.json();
                 console.log(data.user.role_id);
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
     
                 // Check if the user's role_id is 1 and redirect accordingly
                 if (data.user.role_id === 1) {

@@ -1,0 +1,38 @@
+.container{
+    width: 100%;
+    margin-top: 30px;
+}
+
+.tasksList{
+    margin-bottom: 15px;
+}
+
+.listTitle{
+    font-family: "Raleway Regular";
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+}
+
+.listSubtitle{
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.createTaskSpan{
+    margin-left: 10px;
+    color: #1677FF;
+}
+
+.createTaskBtn{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.listTitleBlock{
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

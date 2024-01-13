@@ -1,7 +1,18 @@
 import styles from './style.module.css'
 import {Image} from "react-bootstrap";
+import PmAPI from '../../../../api/pm';
+import { useState } from 'react';
+import {Dialog} from "primereact/dialog";
+import AssignRequestModal from '../../AssignRequestModal';
 
 const OrderCard = ({order, ...props}) => {
+
+    const API = new PmAPI()
+    const [getTheOrderModalShow, setGetTheOrderModalShow] = useState(false)
+    const changeModalShowState = (state) => {
+        setGetTheOrderModalShow(state)
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.info}>
@@ -31,12 +42,27 @@ const OrderCard = ({order, ...props}) => {
                         </div>
 
 
-                        <button className={styles.button}>
+                        <button className={styles.button}
+                            onClick={()=>{
+                                setGetTheOrderModalShow(true)
+                            }}
+                        >
                             Беру
                         </button>
                     </div>
                 </div>
             </div>
+
+
+            <Dialog header={"Вы приняли проект в работу"} 
+                visible={getTheOrderModalShow} 
+                position={'center'} 
+                style={{ width: '30vw', fontFamily: 'Raleway Medium' }}
+                breakpoints={{ '960px': '75vw', '641px': '100vw' }}
+                onHide={() => setGetTheOrderModalShow(false)} 
+                draggable={false} resizable={false}>
+                <AssignRequestModal changeModalShowState={changeModalShowState} order={order}/>
+            </Dialog>
         </div>
     )
 }

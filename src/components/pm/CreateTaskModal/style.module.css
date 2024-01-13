@@ -1,0 +1,38 @@
+.id{
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.input{
+    font-family: "Raleway Regular";
+    width: 100%;
+    padding: 5px 8px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.list{
+    margin-top: 15px;
+}
+.listTitle{
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.bigTitle{
+    font-size: 1.25rem;
+    font-weight: 700;
+    font-family: "Raleway Medium";
+}
+
+.createSubtaskBtn{
+    display: flex;
+    align-items: center;
+    color: #1677FF;
+    cursor: pointer;
+}
+
+.createSubtaskBtn > svg {
+    margin-right: 8px;
+}

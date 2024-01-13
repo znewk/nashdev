@@ -10,7 +10,7 @@ import Loader from "../../../Loader";
 import MyOrderCard from "../MyOrderCard";
 
 
-const MyOrdersList = ({changeModalShowState, orders, loadingOrders, ...props}) => {
+const MyOrdersList = ({changeModalShowState, user, orders, loadingOrders, ...props}) => {
 
     const API = new api()
 
@@ -50,9 +50,13 @@ const MyOrdersList = ({changeModalShowState, orders, loadingOrders, ...props}) =
                             )
                             :
                             (
-                                orders.map((order) => {return (
-                                    <MyOrderCard order={order}/>
-                                )})
+                                orders.map((order) => {
+                                    if(order.manager == user.name){
+                                        return (
+                                            <MyOrderCard order={order}/>
+                                        )
+                                    }
+                                })
                             )
                     )
                 }

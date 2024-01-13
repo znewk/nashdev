@@ -1,0 +1,101 @@
+.container{
+    padding: 0;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0px;
+    /*margin-top: -25px;*/
+}
+.formTitle{
+    font-family: "Raleway Medium";
+    color: #1C1C1C;
+    font-size: 28px;
+    padding-bottom: 25px;
+}
+
+.infoTitleBlock{
+    display: flex;
+    align-items: center;
+}
+.infoTitle{
+    font-size: 18px;
+    color: black;
+    padding-bottom: 15px;
+}
+
+.desc {
+    color: #4F4F4F;
+    font-size: 14px;
+}
+
+
+
+.textArea{
+    font-family: 'Raleway Regular';
+    background-color: rgba(242, 242, 242, 0.40);
+    border-radius: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+    color: black;
+    border: none;
+    width: 100%;
+    height: 100px;
+    resize: none;
+    font-size: 16px;
+}
+
+.textArea::placeholder{
+    color: #8D8D8D;
+}
+
+.p-inputtext{
+    border: none;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+
+.btn{
+    border-radius: 8px;
+    background: #36FFB9;
+    padding: 8px 16px;
+    font-family: "Raleway Medium";
+    font-size: 16px;
+    border: 1px solid #36FFB9;
+    cursor: pointer;
+    color: black;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+.close{
+    border-radius: 8px;
+    background: #fff;
+    padding: 8px 16px;
+    font-family: "Raleway Medium";
+    font-size: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    color: black;
+    margin-bottom: 10px;
+}
+.modalButtons{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+.decline{
+    margin-right: 15px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 10px 30px;
+    border-radius: 20px;
+    cursor: pointer;
+}
