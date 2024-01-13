@@ -17,14 +17,20 @@ const MyOrderBlock = ({id, ...props}) => {
 
 
     useEffect(() => {
+        if (!id) {
+            setLoadingOrder(true);
+            return; // Выход, если ID еще не установлен
+        }
+
         const fetchOrder = async () => {
-            const order = await API.getOrderById();
-            setOrder(order);
+            const orders = await API.getOrderById();
+            const foundOrder = orders.find(order => order.id === parseInt(id));
+            setOrder(foundOrder || null);
             setLoadingOrder(false);
         };
-    
+
         fetchOrder();
-    }, []);
+    }, [id]);
     return (
         <div className={styles.container}>
             <div className={styles.info}>

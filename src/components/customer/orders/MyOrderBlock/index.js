@@ -17,14 +17,20 @@ const MyOrderBlock = ({id, ...props}) => {
 
 
     useEffect(() => {
+        if (!id) {
+            setLoadingOrder(true);
+            return; // Выход, если ID еще не установлен
+        }
+
         const fetchOrder = async () => {
-            const order = await API.getOrderById();
-            setOrder(order);
+            const orders = await API.getOrderById();
+            const foundOrder = orders.find(order => order.id === parseInt(id));
+            setOrder(foundOrder || null);
             setLoadingOrder(false);
         };
-    
+
         fetchOrder();
-    }, []);
+    }, [id]);
     return (
         <div className={styles.container}>
             <div className={styles.info}>
@@ -51,7 +57,7 @@ const MyOrderBlock = ({id, ...props}) => {
                     </div>
 
                     <p className={styles.subtitle}>
-                        Существуют две основные трактовки понятия «текст»: имманентная (расширенная, философски нагруженная) и репрезентативная (более частная). Имманентный подход подразумевает отношение к тексту как к автономной реальности, нацеленность на выявление его внутренней структуры. Репрезентативный — рассмотрение текста как особой формы представления информации о внешней тексту действительности
+                        {order.description}
                     </p>
                 </div>
                 <div className={styles.mainInfo}>
