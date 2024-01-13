@@ -3,13 +3,13 @@ import Head from "next/head";
 import Header from "../../../../src/components/performer/Header";
 import SideBar from "../../../../src/components/performer/orders/SideBar";
 import OrdersList from "../../../../src/components/performer/orders/OrdersList";
-import api from "../../../src/api";
+import api from "../../../../src/api";
 import {Dialog} from "primereact/dialog";
 import {useEffect, useState} from "react";
-import CreateOrderForm from "../../../src/components/Modals/CreateOrderForm";
-import MyOrdersList from "../../../src/components/orders/MyOrdersList";
+import CreateOrderForm from "../../../../src/components/Modals/CreateOrderForm";
+import MyOrdersList from "../../../../src/components/performer/orders/MyOrdersList";
 import {useRouter} from 'next/router'
-import MyOrderBlock from "../../../src/components/orders/MyOrderBlock";
+import MyOrderBlock from "../../../../src/components/performer/orders/MyOrderBlock";
 
 
 const Order = () => {
