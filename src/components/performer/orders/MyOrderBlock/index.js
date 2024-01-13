@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 import {useEffect, useState} from "react";
-import api from "../../../api";
+import api from "../../../../api";
 import Link from "next/link";
 import {notification} from "antd";
 import {Image} from "react-bootstrap";
