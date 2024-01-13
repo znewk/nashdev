@@ -7,17 +7,17 @@ import { TabView, TabPanel } from 'primereact/tabview';
 import { Dropdown } from 'primereact/dropdown';
 import NoOrder from "../NoOrder";
 import Loader from "../../Loader";
+import MyOrderCard from "../MyOrderCard";
 
 
-const OrdersList = ({changeModalShowState, ...props}) => {
+const OrdersList = ({changeModalShowState, orders, loadingOrders, ...props}) => {
 
     const API = new api()
 
-    const [orders, setOrders] = useState([])
+    // const [orders, setOrders] = useState([])
 
     const [searchInput, setSearchInput] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
-    const [loadingOrders, setLoadingOrders] = useState(true)
     const selectPage = async (idx) => {
         setLoadingOrders(true)
 
@@ -33,19 +33,19 @@ const OrdersList = ({changeModalShowState, ...props}) => {
         setLoadingOrders(false)
     }
 
-    useEffect(async () => {
-        setOrders(await API.getRequestsByCreator())
-
-        setLoadingOrders(false)
-    }, []);
+    // useEffect(async () => {
+    //     setOrders(await API.getAllOrders())
+    
+    //     setLoadingOrders(false)
+    // }, []);
 
     return (
         <div className={styles.container}>
             <div className={styles.orders}>
                 {
                     loadingOrders ? (<Loader/>) : (
-                        orders.length <= 0 ?
-                            (
+                        (!orders || orders.length <= 0) ? // Условная проверка
+                        (
                                 <NoOrder changeModalShowState={changeModalShowState}/>
                             )
                             :

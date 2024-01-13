@@ -1,7 +1,6 @@
 import axios from "axios";
 import API_BASE_URL from '../config.js'
 
-const serverDomain = 'https://0e5e-147-30-76-116.ngrok-free.app'
 
 class API {
 
@@ -38,75 +37,167 @@ class API {
         }
     };
 
+    getRequestsForPm = async () => {
+        try {
+            const token = localStorage.getItem('token');
+    
+            if (!token) {
+                console.error('Отсутствует токен авторизации');
+                return;
+            }
+    
+            const headers = new Headers({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            });
+    
+            const response = await fetch(`${API_BASE_URL}/getAllRequests`, {
+                method: 'POST', 
+                headers: headers,
+            });
+    
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP: ${response.status}`);
+            }
+    
+            const responseData = await response.json();
+            // Фильтрация запросов, где manager пустой
+            const filteredRequests = responseData.requests.filter(request => request.manager === "");
+            return filteredRequests;
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса', error);
+        }
+    };
 
-    getOrderById = async () => {
-        return {
-            id: '12203309',
-            date: '16.02.2022',
-            title: 'Android разработка',
-            currentStatus: {
-                title: 'Оплата',
-                status: 'Ожидает'
-            },
-            statuses: [
-                {
-                    title: 'Модерация',
-                    status: 'Успешно'
-                },
-                {
-                    title: 'Поиск исполнителей',
-                    status: 'Успешно'
-                },
-                {
-                    title: 'Утверждение исполнителей',
-                    status: 'Успешно'
-                },
-                {
-                    title: 'Оплата',
-                    status: ''
-                },
-                {
-                    title: 'В работе',
-                    status: ''
-                },
-                {
-                    title: 'Завершение',
-                    status: ''
-                }
-            ],
-            deadlines: '3 месяца',
-            budget: '50.000₽ - 100.000₽',
-            notification: {
-                title: 'Оплатите заказ',
-                type: 0
-            },
-            responses: [
-                {
-                    name: 'Айдарбек',
-                    rating: 5,
-                    feedbacks: 384,
-                    deadline: '2 недели',
-                    price: '30 000 тг'
-                },
-                {
-                    name: 'Айдарбек',
-                    rating: 5,
-                    feedbacks: 384,
-                    deadline: '2 недели',
-                    price: '30 000 тг'
-                },
-                {
-                    name: 'Айдарбек',
-                    rating: 5,
-                    feedbacks: 384,
-                    deadline: '2 недели',
-                    price: '30 000 тг'
-                }
-            ],
-            isNeedPayment: true
+
+    // getOrderById = async () => {
+    //     return {
+    //         id: '12203309',
+    //         date: '16.02.2022',
+    //         title: 'Android разработка',
+    //         currentStatus: {
+    //             title: 'Оплата',
+    //             status: 'Ожидает'
+    //         },
+    //         statuses: [
+    //             {
+    //                 title: 'Модерация',
+    //                 status: 'Успешно'
+    //             },
+    //             {
+    //                 title: 'Поиск исполнителей',
+    //                 status: 'Успешно'
+    //             },
+    //             {
+    //                 title: 'Утверждение исполнителей',
+    //                 status: 'Успешно'
+    //             },
+    //             {
+    //                 title: 'Оплата',
+    //                 status: ''
+    //             },
+    //             {
+    //                 title: 'В работе',
+    //                 status: ''
+    //             },
+    //             {
+    //                 title: 'Завершение',
+    //                 status: ''
+    //             }
+    //         ],
+    //         deadlines: '3 месяца',
+    //         budget: '50.000₽ - 100.000₽',
+    //         notification: {
+    //             title: 'Оплатите заказ',
+    //             type: 0
+    //         },
+    //         responses: [
+    //             {
+    //                 name: 'Айдарбек',
+    //                 rating: 5,
+    //                 feedbacks: 384,
+    //                 deadline: '2 недели',
+    //                 price: '30 000 тг'
+    //             },
+    //             {
+    //                 name: 'Айдарбек',
+    //                 rating: 5,
+    //                 feedbacks: 384,
+    //                 deadline: '2 недели',
+    //                 price: '30 000 тг'
+    //             },
+    //             {
+    //                 name: 'Айдарбек',
+    //                 rating: 5,
+    //                 feedbacks: 384,
+    //                 deadline: '2 недели',
+    //                 price: '30 000 тг'
+    //             }
+    //         ],
+    //         isNeedPayment: true
+    //     }
+
+    // }
+
+
+
+// Функция для получения заказов по ID с обновлением статусов
+ getOrderById = async () => {
+    // Локальное определение функции updateStatuses
+    const updateStatuses = (statusId) => {
+        const statuses = [
+            { title: 'Модерация', status: '' },
+            { title: 'Поиск исполнителей', status: '' },
+            { title: 'Утверждение исполнителей', status: '' },
+            { title: 'Оплата', status: '' },
+            { title: 'В работе', status: '' },
+            { title: 'Завершение', status: '' },
+        ];
+
+        statuses.forEach((status, index) => {
+            if (index < statusId - 1) {
+                status.status = 'Успешно';
+            } else if (index === statusId - 1) {
+                status.status = 'Ожидает';
+            }
+        });
+
+        return statuses;
+    };
+
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('https://api.nashdeveloper.kz/getRequestsByCreator', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+        if (!data || !data.success) {
+            return null;
         }
 
+        // Обновляем каждый заказ с учетом его текущего status_id
+        const updatedRequests = data.requests.map(request => {
+            return {
+                ...request,
+                statuses: updateStatuses(request.status_id)
+            };
+        });
+
+        console.log("Обновленные данные запросов:", updatedRequests); // Логирование обновленных данных
+        return updatedRequests;
+
+    } catch (error) {
+        console.error('Ошибка при выполнении запроса: ', error);
+        return null;
     }
+};
+
+
     getAllOrders = async (name, password) => {
         let data = {
             name: name,

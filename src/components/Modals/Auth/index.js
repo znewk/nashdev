@@ -26,12 +26,20 @@ const Auth = ({ isVisible, onHide, ...props }) => {
                 },
                 body: JSON.stringify(userData),
             });
-
+    
             if (response.ok) {
                 const data = await response.json();
-                console.log('Ответ сервера:', data);
+                console.log(data.user.role_id);
                 localStorage.setItem('token', data.token);
-                router.push('/orders');
+    
+                // Check if the user's role_id is 1 and redirect accordingly
+                if (data.user.role_id === 1) {
+                    router.push('/customer/orders/my-orders');
+                } else if (data.user.role_id === 4) {
+                    router.push('/performer/orders');
+                } else if (data.user.role_id === 3) {
+                    router.push('/pm/orders')
+                }
             } else if (response.status === 500) {
                 setErrorMessage('Неправильные данные!'); 
             } else {

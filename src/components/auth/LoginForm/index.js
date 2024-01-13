@@ -53,7 +53,7 @@ const LoginForm = () => {
             if (response.ok) {
                 localStorage.setItem('token', data.token);
                 console.log('Регистрация прошла успешно');
-                router.push('/orders');
+                router.push('/');
             } else {
                 // Обработка ошибок при регистрации
                 console.error('Ошибка регистрации');

@@ -15,16 +15,16 @@ const NoOrder = (...props) => {
     return (
         <div className={styles.container}>
             <Image src={'/orders/createorder.png'}/>
-            <p className={styles.title}>Создайте заказ на свой проект!</p>
+            <p className={styles.title}>Свободных заказов в данный момент нет</p>
 
-            <span className={styles.subtitle}>
+            {/* <span className={styles.subtitle}>
                 Мы полность изучим вашу задачу, предоставим <br/> подброное техническое задание и подберем команду <br/> специально под ваш проект
             </span>
 
             <button className={styles.createOrder}>
 
                 <span onClick={()=>{changeModalShowState(true)}}>Создать заказ</span>
-            </button>
+            </button> */}
 
 
 

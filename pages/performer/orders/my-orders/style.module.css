@@ -1,0 +1,26 @@
+
+.content{
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 64px;
+}
+
+.orders{
+    width: 100%;
+    padding-left: 30px;
+    box-sizing: border-box;
+}
+
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .orders{
+        padding: 0 5%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .orders{
+        padding: 0 5%;
+    }
+}

@@ -5,12 +5,12 @@ import { Tag } from "antd";
 const { CheckableTag } = Tag;
 
 const categories = [
-  {id: 1, title:  "Android" },
-  {id: 2,  title: "Мобильное Приложение"},
-  {id: 3,  title:  "Web"},
-  {id: 4,  title: "Frontend"},
-  {id: 5,   title: "Серверное ПО"},
-  { id: 6, title: "Data Analytics" }];
+  {id: 6, title:  "Android" },
+  {id: 5,  title: "Мобильное Приложение"},
+  {id: 4,  title:  "Web"},
+  {id: 3,  title: "Frontend"},
+  {id: 2,   title: "Серверное ПО"},
+  { id: 1, title: "Data Analytics" }];
 
 const Tags = ({ onChange }) => {
     const [selectedCategoryIds, setSelectedCategoryIds] = useState([]);

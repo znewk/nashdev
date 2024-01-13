@@ -1,0 +1,28 @@
+.container{
+    width: 100%;
+    border: 1px solid #FFE58F;
+    background: #FFFBE6;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-radius:  10px;
+}
+
+.message{
+    display: flex;
+    align-items: center;
+}
+
+.message > span {
+    margin-left: 5px;
+}
+
+.button{
+    background: black;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}

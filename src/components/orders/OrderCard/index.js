@@ -23,29 +23,11 @@ const OrderCard = ({order, ...props}) => {
 
                     <div className={styles.deadlinesWrapper}>
                         <div className={styles.categories}>
-
-                            <div className={styles.category}>
-                                разработка
-                            </div>
-                            <div className={styles.category}>
-                                сайт
-                            </div>
-                            <div className={styles.category}>
-                                дизайн
-                            </div>
-                            <div className={styles.category}>
-                                сайт
-                            </div>
-                            <div className={styles.category}>
-                                дизайн
-                            </div>
-                            <div className={styles.category}>
-                                сайт
-                            </div>
-                            <div className={styles.category}>
-                                дизайн
-                            </div>
-
+                            {order.categories && order.categories.map((category, index) => (
+                                <div key={index} className={styles.category}>
+                                    {category.category_title}
+                                </div>
+                            ))}
                         </div>
 
 
