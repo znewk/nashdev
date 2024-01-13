@@ -3,6 +3,7 @@ import styles from './style.module.css';
 import { useRouter } from 'next/router';
 import API_BASE_URL from '../../../../config.js'
 import {useState} from "react";
+import { Select } from 'antd'; 
 
 
 const Auth = ({ isVisible, onHide, ...props }) => {

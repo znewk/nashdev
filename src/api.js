@@ -69,6 +69,51 @@ class API {
         }
     };
 
+    
+    getApplicationResponses = async (id) => {
+
+
+    try {
+
+        
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                console.error('Отсутствует токен авторизации');
+                return;
+            }
+
+        const response = await fetch('https://api.nashdeveloper.kz/getApplicationResponses', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    },
+        body: JSON.stringify({ requestId: id }) // Отправка ID в теле запроса
+        });
+    
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status}`);
+        }
+    
+        const data = await response.json();
+        console.log("Полученные данные:", data);
+    
+        if (data.success && data.applications) {
+            data.applications.forEach(application => {
+                console.log(`ID: ${application.id}, Исполнитель: ${application.name}, Запрос ID: ${application.request_id}`);
+                // Дополнительная обработка для каждого элемента, если необходимо
+            });
+        }
+    
+        return data.applications; // Возврат данных о заявках
+    
+    } catch (error) {
+        console.error('Ошибка при выполнении запроса: ', error);
+        return null; // Возврат null в случае ошибки
+    }
+}
+
 
     // getOrderById = async () => {
     //     return {

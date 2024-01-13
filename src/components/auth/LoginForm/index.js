@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Image } from "react-bootstrap";
 import styles from './style.module.css';
 import API_BASE_URL from '../../../../config.js'
+import { Select } from 'antd';
 
 const LoginForm = () => {
     const router = useRouter();
@@ -13,6 +14,13 @@ const LoginForm = () => {
     const [password, setPassword] = useState(''); 
     const [showPassword, setShowPassword] = useState(false); 
     const [error, setError] = useState('');
+    const [selectedRole, setSelectedRole] = useState('');
+
+    const roleOptions = [
+        { label: 'Заказчик', value: 1 },
+        { label: 'Исполнитель', value: 4 },
+        { label: 'Проектный Менеджер', value: 3 },
+      ];
 
     const goBack = () => {
         router.back(); 
@@ -38,7 +46,7 @@ const LoginForm = () => {
         }
         setError(''); // Предотвращаем стандартное поведение формы
     
-        const userData = { name, email, password };
+        const userData = { name, email, password, role_id: selectedRole };
     
         try {
             // Используем переменную окружения для URL
@@ -103,6 +111,10 @@ const LoginForm = () => {
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </div>
+
+
+
+
                     <div className={styles.inputBody}>
                         <input
                             type={showPassword ? 'text' : 'password'}
@@ -113,6 +125,24 @@ const LoginForm = () => {
                         />
                         {/* Кнопка показа/скрытия пароля */}
                     </div>
+                    
+                    <div>
+                    <Select
+                        placeholder="Выберите роль"
+                        style={{ width: '100%' }}
+                        onChange={(value) => {
+                            setSelectedRole(value); // Store the selected role in state
+                        }}
+                        >
+                        {roleOptions.map((option) => (
+                            <Select.Option key={option.value} value={option.value}>
+                            {option.label}
+                            </Select.Option>
+                        ))}
+                        </Select>
+                    </div>
+
+
                     <div className={styles.submitBtnButton}>
                         <button type="submit" className={styles.signinBtn}>Зарегистрироваться</button>
                     </div>
