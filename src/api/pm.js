@@ -78,10 +78,10 @@ class PmAPI {
             const requestData = {
                 requestId: id
             };
-            const response = await fetch(`${API_BASE_URL}/getManagerTasksByRequest  `, {
+            const response = await fetch(`${API_BASE_URL}/getManagerTasks  `, {
                 method: 'POST', 
                 headers: headers,
-                body: JSON.stringify(requestData),
+                // body: JSON.stringify(requestData),
             });
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
