@@ -1,7 +1,7 @@
 import styles from './style.module.css'
-import Header from "../../src/components/Header";
+import Header from "../../../src/components/Header";
 import Head from "next/head";
-import ProfileHeader from "../../src/components/profile/ProfileHeader";
+import ProfileHeader from "../../../src/components/profile/ProfileHeader";
 const Profile = () => {
     return (
         <div className={styles.container}>
