@@ -34,8 +34,8 @@ const CreateTaskModal = ({ changeModalShowState, order }) => {
             title: title,
             category: category,
             description: description,
-            subtasks: [{title: subtaskTitle, description: subtaskDescription}],
-            requestId: id
+            subtasks: [{subtask_title: subtaskTitle, subtask_description: subtaskDescription}],
+            request_id: id
         }
 
         const response = await API.createTask(data)

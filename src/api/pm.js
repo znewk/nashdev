@@ -141,10 +141,10 @@ class PmAPI {
             const requestData = {
                 requestId: id
             };
-            const response = await fetch(`${API_BASE_URL}/getManagerTasks`, {
+            const response = await fetch(`${API_BASE_URL}/getManagerTasksByRequest`, {
                 method: 'POST', 
                 headers: headers,
-                // body: JSON.stringify(requestData),
+                body: JSON.stringify(requestData),
             });
             if (!response.ok) {
                 throw new Error(`Ошибка HTTP: ${response.status}`);
@@ -171,7 +171,7 @@ class PmAPI {
                 'Content-Type': 'application/json',
             });
     
-            const response = await fetch(`${API_BASE_URL}/createTask   `, {
+            const response = await fetch(`${API_BASE_URL}/createTask`, {
                 method: 'POST', 
                 headers: headers,
                 body: JSON.stringify(data),

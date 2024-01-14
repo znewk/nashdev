@@ -15,7 +15,7 @@ const MyOrderBlock = ({id, ...props}) => {
     const API = new PmAPI()
 
     const [order, setOrder] = useState([])
-    const [tasks, setTasks] = useState([])
+    const [managerTasks, setManagerTasks] = useState([])
     const [loadingOrder, setLoadingOrder] = useState(true)
 
 
@@ -32,7 +32,8 @@ const MyOrderBlock = ({id, ...props}) => {
                 setOrder(foundOrder || null);
     
                 const tasks = await API.getManagerTasksByRequest(foundOrder.id);
-                console.log(tasks);
+                setManagerTasks(tasks)
+
                 console.log(foundOrder);
     
                 setLoadingOrder(false);
@@ -134,7 +135,7 @@ const MyOrderBlock = ({id, ...props}) => {
                     }
 
 
-                    <OrderTasks tasks={tasks} order={order}/>
+                    <OrderTasks managerTasks={managerTasks} order={order}/>
                 </div>
             </div>
 

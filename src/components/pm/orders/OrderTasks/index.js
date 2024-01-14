@@ -1,15 +1,25 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CreateTaskModal from '../../CreateTaskModal';
 import styles from './style.module.css'
 import { Dialog } from 'primereact/dialog';
+import PmAPI from '../../../../api/pm';
 
-const OrderTasks = ({tasks, order, ...props}) =>{
+const OrderTasks = ({managerTasks, order, ...props}) =>{
+    const API = new PmAPI()
 
     const [createTaskShow, setCreateTaskShow] = useState(false)
+    // const [managerTasks, setManagerTasks] = useState([])
 
     const changeModalShowState = (state) => {
         setCreateTaskShow(state)
     }
+
+    // useEffect(()=>{
+    //     console.log(order)
+    //     const tasks = API.getManagerTasksByRequest(order.id);
+
+    //     setManagerTasks(tasks)
+    // }, [])
 
     return(
         <div className={styles.container}>
@@ -38,6 +48,28 @@ const OrderTasks = ({tasks, order, ...props}) =>{
                 </div>
                 <p className={styles.listSubtitle}>Распишите все задачи, которыми вы будете занимать в течении ведения проекта. 
                     Вы можете взять на себя задачи не только по управлению проекта, но и из других категорий</p>
+            </div>
+            <div className={styles.tasksListArea}>
+                {
+                    managerTasks.length != 0 && managerTasks.map(task => (
+                        <div className={styles.task}>
+                            <h2 className={styles.listTitle}>{task.title}</h2>
+                            <p className={styles.listSubtitle}>{task.description}</p>
+                            <p className={styles.listSubtitle}>{task.category}</p>
+
+                            <div className={styles.subtasksList}>
+                                {
+                                    task.subtasks.map(subtask => (
+                                        <div className={styles.subtaskItem}>
+                                            <h2 className={styles.listTitle}>{subtask.title}</h2>
+                                            <p className={styles.listSubtitle}>{subtask.description}</p>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                        </div>
+                    ))
+                }
             </div>
 
 
