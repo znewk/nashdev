@@ -141,7 +141,7 @@ class PmAPI {
             const requestData = {
                 requestId: id
             };
-            const response = await fetch(`${API_BASE_URL}/getManagerTasks  `, {
+            const response = await fetch(`${API_BASE_URL}/getManagerTasks`, {
                 method: 'POST', 
                 headers: headers,
                 // body: JSON.stringify(requestData),
