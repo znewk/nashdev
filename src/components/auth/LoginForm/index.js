@@ -59,6 +59,7 @@ const LoginForm = () => {
             });
     
             if (response.ok) {
+                const data = await response.json(); // Извлеките данные из ответа
                 localStorage.setItem('token', data.token);
                 console.log('Регистрация прошла успешно');
                 router.push('/');

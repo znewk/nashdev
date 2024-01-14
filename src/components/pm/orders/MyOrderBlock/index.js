@@ -19,26 +19,30 @@ const MyOrderBlock = ({id, ...props}) => {
     const [loadingOrder, setLoadingOrder] = useState(true)
 
 
-    useEffect(async () => {
-        if (!id) {
-            setLoadingOrder(true);
-            return; // Выход, если ID еще не установлен
-        }
-
+    useEffect(() => {
         const fetchOrder = async () => {
-            const orders = await API.getAllRequests();
-            const foundOrder = orders.find(order => order.id === parseInt(id));
-            setOrder(foundOrder || null);
-
-            const tasks = await API.getManagerTasksByRequest(foundOrder.id)
-            console.log(tasks)
-
-            console.log(foundOrder)
-            setLoadingOrder(false);
+            if (!id) {
+                setLoadingOrder(true);
+                return; 
+            }
+    
+            try {
+                const orders = await API.getAllRequests();
+                const foundOrder = orders.find(order => order.id === parseInt(id));
+                setOrder(foundOrder || null);
+    
+                const tasks = await API.getManagerTasksByRequest(foundOrder.id);
+                console.log(tasks);
+                console.log(foundOrder);
+    
+                setLoadingOrder(false);
+            } catch (error) {
+                console.error('Ошибка при получении данных:', error);
+                // Обработка ошибок
+            }
         };
-
-        
-
+    
+        // Вызовите функцию
         fetchOrder();
     }, [id]);
     return (
