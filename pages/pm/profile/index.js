@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import Header from "../../../src/components/Header";
+import Header from "../../../src/components/pm/Header";
 import Head from "next/head";
 import ProfileHeader from "../../../src/components/profile/ProfileHeader";
 const Profile = () => {

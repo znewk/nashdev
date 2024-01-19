@@ -5,14 +5,27 @@ import { OverlayPanel } from 'primereact/overlaypanel';
 import { useRef } from 'react';
 import { Button, Dropdown, Space } from 'antd';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
-const Header = ({changeModalShowState, ...props}) => {
-    const op = useRef(null);
-    const [user, setUser] = useState('')
 
-    useEffect(()=>{
-        setUser(JSON.parse(localStorage.getItem('user')))
-    }, [])
+
+    const Header = ({changeModalShowState, ...props}) => {
+        const op = useRef(null);
+    
+        const [user, setUser] = useState('')
+        const router = useRouter()
+    
+        useEffect(()=>{
+            setUser(JSON.parse(localStorage.getItem('user')))
+        }, [])
+    
+    
+        const logOut = () => {
+            localStorage.removeItem('user')
+            localStorage.removeItem('token')
+    
+            router.push('/')
+        }
 
     const items = [
         {
@@ -26,7 +39,7 @@ const Header = ({changeModalShowState, ...props}) => {
         {
             key: '2',
             label: (
-                <a rel="noopener noreferrer" href="/orders/my-orders">
+                <a rel="noopener noreferrer" href="/pm/orders/my-orders">
                     Мои заказы
                 </a>
             ),
@@ -34,7 +47,7 @@ const Header = ({changeModalShowState, ...props}) => {
         {
             key: '3',
             label: (
-                <a rel="noopener noreferrer" href="/">
+                <a rel="noopener noreferrer" href="/pm/cards">
                     Способы оплаты
                 </a>
             ),
@@ -42,24 +55,8 @@ const Header = ({changeModalShowState, ...props}) => {
         {
             key: '4',
             label: (
-                <a rel="noopener noreferrer" href="/">
+                <a rel="noopener noreferrer" href="/pm/edit">
                     Настройки
-                </a>
-            ),
-        },
-        {
-            key: '5',
-            label: (
-                <a rel="noopener noreferrer" href="/">
-                    FAQ
-                </a>
-            ),
-        },
-        {
-            key: '6',
-            label: (
-                <a rel="noopener noreferrer" href="/">
-                    Поддержка
                 </a>
             ),
         },
@@ -102,18 +99,22 @@ const Header = ({changeModalShowState, ...props}) => {
                     </svg>
                 </div>
                 <OverlayPanel ref={op}>
-                    <Link href={'/profile'}>
+                    <Link href={'/pm/profile'}>
                         <div >
                             <span className={styles.link}>Мой профиль</span>
                         </div>
 
                     </Link>
-                    <Link href={'/profile'}>
+                    <Link href={'/pm/edit'}>
                         <div>
                             <span className={styles.link}>Настройки аккаунта</span>
                         </div>
 
                     </Link>
+
+                    <div onClick={()=>logOut()}>
+                        <span className={styles.link}>Выход</span>
+                    </div>
                 </OverlayPanel>
             </div>
 

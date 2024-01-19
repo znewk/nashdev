@@ -2,25 +2,42 @@ import styles from './style.module.css'
 import {Image} from "react-bootstrap";
 import Link from "next/link";
 import { OverlayPanel } from 'primereact/overlaypanel';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Button, Dropdown, Space } from 'antd';
+import { useRouter } from 'next/router';
 
 const Header = ({changeModalShowState, ...props}) => {
     const op = useRef(null);
 
+    const [user, setUser] = useState('')
+    const router = useRouter()
+
+    useEffect(()=>{
+        setUser(JSON.parse(localStorage.getItem('user')))
+    }, [])
+
+
+    const logOut = () => {
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+
+        router.push('/')
+    }
+
+
     const items = [
-        {
-            key: '1',
-            label: (
-                <a rel="noopener noreferrer" href="/orders">
-                    Биржа
-                </a>
-            ),
-        },
+        // {
+        //     key: '1',
+        //     label: (
+        //         <a rel="noopener noreferrer" href="/orders">
+        //             Биржа
+        //         </a>
+        //     ),
+        // },
         {
             key: '2',
             label: (
-                <a rel="noopener noreferrer" href="/orders/my-orders">
+                <a rel="noopener noreferrer" href="/customer/orders/my-orders">
                     Мои заказы
                 </a>
             ),
@@ -28,7 +45,7 @@ const Header = ({changeModalShowState, ...props}) => {
         {
             key: '3',
             label: (
-                <a rel="noopener noreferrer" href="/">
+                <a rel="noopener noreferrer" href="/customer/cards">
                     Способы оплаты
                 </a>
             ),
@@ -36,7 +53,7 @@ const Header = ({changeModalShowState, ...props}) => {
         {
             key: '4',
             label: (
-                <a rel="noopener noreferrer" href="/">
+                <a rel="noopener noreferrer" href="/customer/edit">
                     Настройки
                 </a>
             ),
@@ -44,7 +61,7 @@ const Header = ({changeModalShowState, ...props}) => {
         {
             key: '5',
             label: (
-                <a rel="noopener noreferrer" href="/">
+                <a rel="noopener noreferrer" href="/customer/faq">
                     FAQ
                 </a>
             ),
@@ -52,7 +69,7 @@ const Header = ({changeModalShowState, ...props}) => {
         {
             key: '6',
             label: (
-                <a rel="noopener noreferrer" href="/">
+                <a rel="noopener noreferrer" href="/customer/contactus">
                     Поддержка
                 </a>
             ),
@@ -89,7 +106,7 @@ const Header = ({changeModalShowState, ...props}) => {
                         </svg>
                     </div>
 
-                    <span className={styles.profileBlockTitle}>GoDaddy</span>
+                    <span className={styles.profileBlockTitle}>{user.name}</span>
 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="black">
                         <path d="M12.086 3.5H11.0606C10.9909 3.5 10.9252 3.53418 10.8842 3.59023L7.00005 8.94414L3.11587 3.59023C3.07486 3.53418 3.00923 3.5 2.9395 3.5H1.91411C1.82525 3.5 1.77329 3.60117 1.82525 3.67363L6.64595 10.3195C6.82095 10.5602 7.17915 10.5602 7.35279 10.3195L12.1735 3.67363C12.2268 3.60117 12.1749 3.5 12.086 3.5Z" fill=""/>
@@ -102,12 +119,17 @@ const Header = ({changeModalShowState, ...props}) => {
                         </div>
 
                     </Link>
-                    <Link href={'/profile'}>
+                    <Link href={'/customer/edit'}>
                         <div>
                             <span className={styles.link}>Настройки аккаунта</span>
                         </div>
 
                     </Link>
+
+                    
+                    <div onClick={()=>logOut()}>
+                        <span className={styles.link}>Выход</span>
+                    </div>
                 </OverlayPanel>
             </div>
 

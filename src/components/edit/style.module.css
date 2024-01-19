@@ -1,0 +1,12 @@
+@media only screen and (max-width: 767px) {
+    .ant-col-xs-24 {
+      padding: 0;
+    }
+  }
+  
+  /* Стили для более крупных экранов */
+  @media only screen and (min-width: 768px) {
+    .ant-form-item {
+      max-width: 300px; /* Максимальная ширина полей ввода */
+    }
+  }

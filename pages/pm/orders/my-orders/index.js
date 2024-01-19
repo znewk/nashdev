@@ -1,6 +1,6 @@
 import styles from './style.module.css'
 import Head from "next/head";
-import Header from "../../../../src/components/Header";
+import Header from "../../../../src/components/pm/Header";
 import SideBar from "../../../../src/components/pm/orders/SideBar";
 import OrdersList from "../../../../src/components/pm/orders/OrdersList";
 import api from "../../../../src/api";
