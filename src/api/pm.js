@@ -186,6 +186,71 @@ class PmAPI {
             console.error('Ошибка при выполнении запроса', error);
         }
     };
+
+    
+    duplicateTask  = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('Отсутствует токен авторизации');
+                return;
+            }
+            const headers = new Headers({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            });
+
+            const data = {
+                taskId: id
+            }
+    
+            const response = await fetch(`${API_BASE_URL}/duplicateTask`, {
+                method: 'POST', 
+                headers: headers,
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP: ${response.status}`);
+            }
+    
+            const responseData = await response.json();
+            return responseData
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса', error);
+        }
+    };
+
+    archiveTask  = async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('Отсутствует токен авторизации');
+                return;
+            }
+            const headers = new Headers({
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            });
+
+            const data = {
+                taskId: id
+            }
+    
+            const response = await fetch(`${API_BASE_URL}/archiveTask`, {
+                method: 'POST', 
+                headers: headers,
+                body: JSON.stringify(data),
+            });
+            if (!response.ok) {
+                throw new Error(`Ошибка HTTP: ${response.status}`);
+            }
+    
+            const responseData = await response.json();
+            return responseData
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса', error);
+        }
+    };
 }
 
 export default PmAPI;
