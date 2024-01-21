@@ -6,7 +6,7 @@ const ProfileHeader = () => {
     return (
         <div className={styles.header}>
             <div className={styles.topLine}>
-                <Link href={'/orders'}>
+                <Link href={'/pm/orders'}>
                     <span>Мои заказы - Заказчик - Алексей Иванов</span>
                 </Link>
 
