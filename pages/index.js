@@ -21,6 +21,8 @@ const Index = () => {
         setIsResetPasswordVisible(isResetPasswordVisible);
     };
 
+ 
+
     return(
         <div>
             <Head>
@@ -33,7 +35,7 @@ const Index = () => {
                 <HeaderMain changeModalShowState={changeModalShowState} />
                 <Auth isVisible={isModalVisible} onHide={() => changeModalShowState(false, false, false)} onForgotPassword={() => changeModalShowState(false, false, true)} />            <ResetPasswordDialog isResetVisible={isResetPasswordVisible} onHideReset={() => setIsResetPasswordVisible(false)} />
                 <Dialog visible={createOrderShow} onHide={() => setCreateOrderShow(false)} draggable={false}>
-                    <CreateOrderForm onHide={() => setCreateOrderShow(false)} />
+                <CreateOrderFormNoReg changeModalShowState={changeModalShowState} />
                 </Dialog>
             </div>
 

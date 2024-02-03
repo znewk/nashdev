@@ -77,51 +77,65 @@ const CreateOrderForm = ({ changeModalShowState }) => {
 
     return (
         <div className={styles.container}>
+            <Form>
+                <div className={styles.form}>
+                    <h1 className={styles.formTitle}>Создание заказа</h1>
+                    
+                    <Form.Item
+                        name="title"
+                        rules={[{ required: true, message: 'Пожалуйста, введите наименование заказа!' }]}
+                    >
+                        <Input
+                            placeholder="Наименование Заказа"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                            style={{ marginBottom: "20px" }}
+                        />
+                    </Form.Item>
 
-            <div className={styles.form}>
-            <h1 className={styles.formTitle}>Создание заказ</h1>
-            
-            <div className={styles.infoTitleBlock}>
-            <span className={styles.infoTitle}>Наименование Заказа</span>     
-            </div>
-            
-            <Input placeholder="Наименование Заказа"  
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-            
-                style={{marginBottom: "20px"}}/>
+                    <Form.Item name="categories">
+                        <Tags onChange={handleTagsChange} />
+                    </Form.Item>
 
+                    <Form.Item
+                        name="description"
+                        rules={[{ required: true, message: 'Пожалуйста, опишите вашу задачу!' }]}
+                    >
+                        <Input.TextArea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </Form.Item>
 
-            <div className={styles.infoTitleBlock}>
-            <Tags onChange={handleTagsChange} /> 
-            </div>
+                    <Form.Item
+                        name="upload"
+                        valuePropName="fileList"
+                        getValueFromEvent={normFile}
+                    >
+                        <Upload name="logo" listType="text" onChange={normFile}>
+                            <Button icon={<UploadOutlined />}>Прикрепить файл</Button>
+                        </Upload>
+                    </Form.Item>
 
-            <div className={styles.infoTitleBlock}>
-            <span className={styles.infoTitle}>Опишите вашу задачу</span>     
-            </div>
+                    <Form.Item
+                        name="phone"
+                        rules={[{ required: true, message: 'Пожалуйста, введите ваш телефон!' }]}
+                    >
+                        <Input
+                            addonBefore={prefixSelector}
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            style={{ width: '100%' }}
+                        />
+                    </Form.Item>
 
-            {/* Добавьте обработчик onChange для описания задачи */}
-            <Input.TextArea 
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-            />
-            <div className={styles.file}>
-                 <Form.Item
-                name="upload"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                >
-                <Upload name="logo" listType="text" valuePropName="fileList" onChange={normFile}>
-                    <Button icon={<UploadOutlined />}>Прикрепить Файл</Button>
-                </Upload>
-                </Form.Item>
+                    <div className={styles.footer}>
+                        <Button type="primary"  style={{ background: "#36FFB9" }} onClick={handleSubmit}>Отправить заявку</Button>
+                        <span onClick={() => setShowCloseModal(true)} className={styles.close}>Создать заказ позже</span>
+                    </div>
                 </div>
-
-                <div className={styles.footer}>
-                    <button className={styles.btn} onClick={handleSubmit}>Отправить заявку</button>
-                    <span onClick={()=>setShowCloseModal(true)} className={styles.close}>Создать заказ позже</span>
-                </div>
-            </div>
+            </Form>
+            
 
             <Dialog header="Выход из создания заказа" visible={showCloseModal} style={{ width: '25vw' }} onHide={() => setShowCloseModal(false)} draggable={false}>
                  <p className={styles.desc} style={{textAlign: "center"}}>

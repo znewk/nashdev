@@ -41,9 +41,9 @@ const MyOrderCard = ({order, ...props}) => {
 
 
                         <Link href={`/orders/my-orders/${order.id}`}>
-                            <span className={styles.button}>
-                                Подробнее
-                            </span>
+
+                            <Button  style={{ background: "#36FFB9" }} type="primary">Подробнее</Button>
+
                         </Link>
 
                     </div>

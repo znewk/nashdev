@@ -42,7 +42,6 @@ class PmAPI {
 
         const updateStatuses = (statusId) => {
             const statuses = [
-                { title: 'Модерация', status: '' },
                 { title: 'Поиск исполнителей', status: '' },
                 { title: 'Утверждение исполнителей', status: '' },
                 { title: 'Оплата', status: '' },
@@ -54,7 +53,7 @@ class PmAPI {
                 if (index < statusId - 1) {
                     status.status = 'Успешно';
                 } else if (index === statusId - 1) {
-                    status.status = 'Ожидает';
+                    status.status = 'В процессе';
                 }
             });
         
