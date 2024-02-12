@@ -47,7 +47,7 @@ const SideBar = ({changeModalShowState, ...props}) => {
                 </div>
                 </Link>
 
-                <Link href={'/pm/edit'}>
+                <Link href={'/profile/edit'}>
 
                 <div className={classnames(styles.tab)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" className={styles.svg}>
