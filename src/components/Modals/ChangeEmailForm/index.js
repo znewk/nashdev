@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './style.module.css';
 import API_BASE_URL from '../../../../config.js'
-import { Form, Input, Button, Upload, Row, Col, Avatar } from 'antd';
+import { Form, Input, Button, Upload, Row, Col, Avatar, Alert } from 'antd';
 import { UserOutlined, MailOutlined, LockOutlined, PhoneOutlined, EditOutlined } from '@ant-design/icons';
 import SettingsAPI from '../../../api/settings.js';
 
@@ -18,19 +18,45 @@ const ChangeEmailForm = ({ changeModalShowState }) => {
     const onFinish = async (values) => {
         console.log('Received values of form: ', values);
 
-        if(values.newEmail == undefined) {
+        if(false) {
             setErrorMessage('Заполните поле!')
         } else {
-            const result = await API.changePhone(values.newEmail)
+            if(step == 1) {
+                if(values.newEmail == undefined) {
+                    setErrorMessage('Заполните поле!')
+                } else {
+                    console.log('newEmaIL: ', values.newEmail);
 
-            if(!result){
-                setErrorMessage("Ошибка смены номера телефона")
-                setSuccess(false)
-                console.log(success)
+                    const result = await API.sendVerificationCode()
+    
+                    if(!result){
+                        setErrorMessage("Ошибка отправки кода верификации")
+                        setSuccess(false)
+                        console.log(success)
+                    } else {
+                        setErrorMessage('')
+                        setStep(2)  
+                    }
+                }
+                
             } else {
-                setErrorMessage('')
-                setSuccess(true)
-                console.log(success)    
+                console.log(newEmail)
+                if(values.verifCode == undefined){
+                    setErrorMessage('Заполните все поля!')
+                } else {
+                    const result = await API.changeEmail(values.newEmail, values.verifCode)
+
+                    if(!result){
+                        setErrorMessage("Неверный код верификации")
+                        setSuccess(false)
+                        console.log(success)
+                    } else {
+                        setErrorMessage('')
+                        setSuccess(true)
+                        console.log(success)
+                        setStep(2)  
+                    }
+                }
             }
         }
 
@@ -38,7 +64,7 @@ const ChangeEmailForm = ({ changeModalShowState }) => {
 
 
     const firstStep = async () => {
-        
+        console.log(newEmail)
     }
 
     return (
@@ -62,10 +88,10 @@ const ChangeEmailForm = ({ changeModalShowState }) => {
                             </Form.Item>
 
                             <span className={styles.errorMessage}>{errorMessage}</span> 
-                            <span className={styles.message}>Мы отправим код на ваш новый e-mail</span>
+                            <span className={styles.message}>Мы отправим код на ваш текущий e-mail для подтверждения личности</span>
                         
                             <div className={styles.btnBody}>
-                                <button className={styles.btn} onClick={firstStep()}>Отправить код</button>
+                                <Button className={styles.btn} htmlType='submit'>Отправить код</Button>
                             </div>
                         </div>
                     ) : null
@@ -84,7 +110,7 @@ const ChangeEmailForm = ({ changeModalShowState }) => {
                             </Form.Item>
 
                             <span className={styles.errorMessage}>{errorMessage}</span> 
-                            <span className={styles.message}>Проверьте письмо на своей почте</span>
+                            <span className={styles.message}>Код успешно отправлен на Вашу почту, проверьте ящик</span>
                         
                             <div className={styles.btnBody}>
                                 <button className={styles.btn} type='submit'>Сохранить</button>
@@ -92,7 +118,16 @@ const ChangeEmailForm = ({ changeModalShowState }) => {
                         </div>
                     ) : null
                 }
-                
+                {
+                    success ? (
+                        <Alert
+                            message="Номер успешно обновлен"
+                            type="success"
+                            showIcon
+                            closeable   
+                        />
+                    ) : null
+                }
             </Form>
             
         </div>
