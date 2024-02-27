@@ -167,4 +167,10 @@
     font-weight: bold;
     padding-bottom: 1%;
 
+    display: flex;
+
+}
+
+.title > h3 {
+    margin-right: 15px;
 }

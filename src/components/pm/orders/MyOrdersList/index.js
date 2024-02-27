@@ -18,20 +18,20 @@ const MyOrdersList = ({changeModalShowState, user, orders, loadingOrders, ...pro
 
     const [searchInput, setSearchInput] = useState('')
     const [currentPage, setCurrentPage] = useState(1)
-    const selectPage = async (idx) => {
-        setLoadingOrders(true)
+    // const selectPage = async (idx) => {
+    //     setLoadingOrders(true)
 
-        switch (idx){
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-                setOrders(await API.getRequestsByCreator())
-        }
+    //     switch (idx){
+    //         case 1:
+    //         case 2:
+    //         case 3:
+    //         case 4:
+    //             setOrders(await API.getRequestsByCreator())
+    //     }
 
-        setCurrentPage(idx)
-        setLoadingOrders(false)
-    }
+    //     setCurrentPage(idx)
+    //     setLoadingOrders(false)
+    // }
 
     // useEffect(async () => {
     //     setOrders(await API.getAllOrders())

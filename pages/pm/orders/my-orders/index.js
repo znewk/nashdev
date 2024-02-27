@@ -26,8 +26,9 @@ const myOrders = () => {
 
     useEffect(() => {
         const fetchOrders = async () => {
+            
 
-            const allOrders = await API.getAllRequests();
+            const allOrders = await API.getRequestsByManager();
             
             setOrders(allOrders);
             setRequests(allOrders);

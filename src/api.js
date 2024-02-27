@@ -427,6 +427,38 @@ class API {
             },
         ]
     }
+
+
+
+
+    changeRequestTitle = async (data) => {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            console.error('Отсутствует токен авторизации');
+            return false; // или выбросить ошибку
+        }
+
+        const headers = {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+        };
+
+        try {
+            const response = await axios.post(`${API_BASE_URL}/updateRequest`, data, { headers });
+
+            return {
+                success: true
+            }; // Возвращаем true, если статус успешный
+        } catch (error) {
+            if (error.response.status === 400) {
+                return response.message; // Возвращаем false, если статус 400
+            } else {
+                console.error('Ошибка обновления заказа:', error.response.data);
+                throw error; // Пробрасываем ошибку для обработки выше
+            }
+        }
+    };
 }
 
 export default API;

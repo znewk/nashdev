@@ -98,6 +98,60 @@ class PmAPI {
         }
     };
 
+    getRequestsByManager = async () => {
+        const updateStatuses = (statusId) => {
+            const statuses = [
+                { title: 'Поиск исполнителей', status: '' },
+                { title: 'Утверждение исполнителей', status: '' },
+                { title: 'Оплата', status: '' },
+                { title: 'В работе', status: '' },
+                { title: 'Завершение', status: '' },
+            ];
+        
+            statuses.forEach((status, index) => {
+                if (index < statusId - 1) {
+                    status.status = 'Успешно';
+                } else if (index === statusId - 1) {
+                    status.status = 'В процессе';
+                }
+            });
+        
+            return statuses;
+        };
+    
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                console.error('Отсутствует токен авторизации');
+                return;
+            }
+            const user = JSON.parse(localStorage.getItem('user'))
+            const headers = {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            };
+    
+            const response = await axios.post(`${API_BASE_URL}/getRequestsByManager`, {
+                manager_id: user.user_id
+            }, { headers });
+    
+            // Обработка ответа
+            const responseData = response.data;
+    
+            // Обновляем каждый запрос с учетом его текущего status_id
+            const updatedRequests = responseData.requests.map(request => ({
+                ...request,
+                statuses: updateStatuses(request.status_id)
+            }));
+    
+            console.log("Обновленные данные запросов:", updatedRequests); // Логирование обновленных данных
+            return updatedRequests;
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса', error);
+            throw error; // Проброс ошибки для дальнейшей обработки
+        }
+    };
+
     // getAllRequests = async (id) => {
     //     try {
     //         const token = localStorage.getItem('token');

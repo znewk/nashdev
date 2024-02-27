@@ -11,6 +11,9 @@ import OrderResponseCard from '../OrderResponseCard';
 import PmAPI from '../../../../api/pm';
 import OrderTasks from '../OrderTasks';
 import { Steps, Button } from 'antd';
+import { EditOutlined } from '@ant-design/icons';
+import ChangeTitleForm from '../../../Modals/ChangeTitleForm';
+import ChangeDesciprionForm from '../../../Modals/ChangeDesciptionForm';
 
 const MyOrderBlock = ({id, ...props}) => {
     const API = new PmAPI()
@@ -50,8 +53,28 @@ const MyOrderBlock = ({id, ...props}) => {
         // Вызовите функцию
         fetchOrder();
     }, [id]);
+
+
+    const [titleModalShpw, setTitleModalShow] = useState(false)
+    const changeTitleModalShow = (state) => {
+        setTitleModalShow(state)
+    }
+
+    const [descModalShow, setDescModalShow] = useState(false)
+    const changeDescModalShow = (state) => {
+        setDescModalShow(state)
+    }
     return (
         <div className={styles.container}>
+
+            <Dialog visible={titleModalShpw} header={'Изменение заголовка'} position={'center'} style={{ width: '35vw', fontFamily: 'Raleway Regular'}} onHide={() => setTitleModalShow(false)} draggable={false} resizable={false}>
+                <ChangeTitleForm changeModalShowState={changeTitleModalShow} title={order.title} order={order}/>
+            </Dialog>
+
+            <Dialog visible={descModalShow} header={'Изменение описания'} position={'center'} style={{ width: '35vw', fontFamily: 'Raleway Regular'}} onHide={() => setDescModalShow(false)} draggable={false} resizable={false}>
+                <ChangeDesciprionForm changeModalShowState={changeDescModalShow} order={order}/>
+            </Dialog>
+
             <div className={styles.info}>
                 <div className={styles.infoHeader}>
                     <div>
@@ -70,6 +93,10 @@ const MyOrderBlock = ({id, ...props}) => {
                     <div className={styles.infoHeader}>
                     <div className={styles.title}>
                         <h3>{order.title}</h3>
+
+                        <EditOutlined style={{color: '#1677ff', cursor: 'pointer'}} onClick={()=>{
+                            setTitleModalShow(true)
+                        }}/>
                     </div>
                     <Button style={{ background: "#36FFB9" }}type="primary" className={styles.customButton}>Отправить на предоплату</Button>
       
@@ -104,6 +131,10 @@ const MyOrderBlock = ({id, ...props}) => {
                         </div>
                     <p className={styles.subtitle}>
                         {order.description}
+
+                        <div onClick={()=>{setDescModalShow(true)}} style={{color: '#1677ff', cursor: 'pointer'}}>
+                            Редактировать
+                        </div>
                     </p>
                 </div>
                 <div className={styles.mainInfo}>
