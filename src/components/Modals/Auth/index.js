@@ -33,6 +33,8 @@ const Auth = ({ isVisible, onHide, ...props }) => {
                 console.log(data.user.role_id);
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('user', JSON.stringify(data.user));
+                // Сохраняем role_id пользователя в localStorage
+                localStorage.setItem('role_id', data.user.role_id.toString());
     
                 // Check if the user's role_id is 1 and redirect accordingly
                 if (data.user.role_id === 1) {
@@ -51,7 +53,6 @@ const Auth = ({ isVisible, onHide, ...props }) => {
             console.error('Ошибка сети:', error);
         }
     };
-
     return (
         <Dialog visible={isVisible} onHide={onHide} modal>
             <div className={styles.container}>

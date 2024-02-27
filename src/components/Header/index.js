@@ -25,64 +25,84 @@ const Header = ({changeModalShowState, ...props}) => {
     }
 
 
+    const role_id = localStorage.getItem("role_id");
+
+    // Функция для определения пути на основе role_id
+    const getPathForRole = (baseRoute) => {
+      switch (role_id) {
+        case "1": // Для customer
+          return `/customer${baseRoute}`;
+        case "3": // Для pm
+          return `/pm${baseRoute}`;
+      }
+    };
+    
     const items = [
-        {
+    ].concat(
+        role_id === "3" ? [
+          {
             key: '1',
             label: (
-                <a rel="noopener noreferrer" href="/orders">
-                    Биржа
-                </a>
+              <a rel="noopener noreferrer" href={getPathForRole("/orders")}>
+                Биржа
+              </a>
             ),
-        },
-        {
-            key: '2',
-            label: (
-                <a rel="noopener noreferrer" href="/orders/my-orders">
-                    Мои заказы
-                </a>
-            ),
-        },
-        {
-            key: '3',
-            label: (
-                <a rel="noopener noreferrer" href="/">
-                    Способы оплаты
-                </a>
-            ),
-        },
-        {
-            key: '4',
-            label: (
-                <a rel="noopener noreferrer" href="/">
-                    Настройки
-                </a>
-            ),
-        },
-        {
+          }
+        ] : []
+      ).concat([
+      {
+          key: '2',
+          label: (
+              <a rel="noopener noreferrer" href={getPathForRole("/orders/my-orders")}>
+                  Мои заказы
+              </a>
+          ),
+      },
+      {
+          key: '3',
+          label: (
+              <a rel="noopener noreferrer" href={getPathForRole("/cards")}>
+                  Способы оплаты
+              </a>
+          ),
+      },
+      {
+          key: '4',
+          label: (
+              <a rel="noopener noreferrer" href={"/profile/edit"}>
+                  Настройки
+              </a>
+          ),
+      },
+    ].concat(
+        role_id === "1" ? [
+          {
             key: '5',
             label: (
-                <a rel="noopener noreferrer" href="/">
-                    FAQ
-                </a>
+              <a rel="noopener noreferrer" href={getPathForRole("/faq")}>
+                FAQ
+              </a>
             ),
-        },
-        {
+          },
+          {
             key: '6',
             label: (
-                <a rel="noopener noreferrer" href="/">
-                    Поддержка
-                </a>
+              <a rel="noopener noreferrer" href={getPathForRole("/contactus")}>
+                Поддержка
+              </a>
             ),
-        },
-        {
-            key: '7',
-            label: (
-                <span onClick={()=>{changeModalShowState(true)}}>
-                    Создать заказ
-                </span>
-            ),
-        },
-    ];
+          }
+        ] : []
+      ).concat([      
+      {
+          key: '7',
+          label: (
+              <span onClick={()=>{changeModalShowState(true)}}>
+                  Создать заказ
+              </span>
+          ),
+      }
+    ]));
     return (
         <header className={styles.header}>
             <Link href={'/'}>
@@ -90,7 +110,7 @@ const Header = ({changeModalShowState, ...props}) => {
             </Link>
 
             <div className={styles.menu}>
-               <button className={styles.button} onClick={()=>{changeModalShowState(true)}}>
+            <button className={styles.button} onClick={()=>{changeModalShowState(true)}}>
                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
                        <path d="M10.875 7.5H8.5V5.125C8.5 5.05625 8.44375 5 8.375 5H7.625C7.55625 5 7.5 5.05625 7.5 5.125V7.5H5.125C5.05625 7.5 5 7.55625 5 7.625V8.375C5 8.44375 5.05625 8.5 5.125 8.5H7.5V10.875C7.5 10.9438 7.55625 11 7.625 11H8.375C8.44375 11 8.5 10.9438 8.5 10.875V8.5H10.875C10.9438 8.5 11 8.44375 11 8.375V7.625C11 7.55625 10.9438 7.5 10.875 7.5Z" fill="black" fill-opacity="0.88"/>
                        <path d="M8 1C4.13438 1 1 4.13438 1 8C1 11.8656 4.13438 15 8 15C11.8656 15 15 11.8656 15 8C15 4.13438 11.8656 1 8 1ZM8 13.8125C4.79063 13.8125 2.1875 11.2094 2.1875 8C2.1875 4.79063 4.79063 2.1875 8 2.1875C11.2094 2.1875 13.8125 4.79063 13.8125 8C13.8125 11.2094 11.2094 13.8125 8 13.8125Z" fill="black" fill-opacity="0.88"/>
@@ -119,7 +139,7 @@ const Header = ({changeModalShowState, ...props}) => {
                         </div>
 
                     </Link>
-                    <Link href={'/profile'}>
+                    <Link href={'/profile/edit'}>
                         <div>
                             <span className={styles.link}>Настройки аккаунта</span>
                         </div>
