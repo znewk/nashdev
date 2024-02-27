@@ -220,4 +220,8 @@ const MyOrderBlock = ({id, ...props}) => {
     )
 }
 
+<<<<<<< HEAD
 export default MyOrderBlock;
+=======
+export default MyOrderBlock;
+>>>>>>> 526288e65772b66afe2f18a18db448396f30bb02
